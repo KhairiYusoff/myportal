@@ -19,3 +19,24 @@ export const login = async (params) => {
     throw new Error("Login failed");
   }
 };
+
+export const fetchUserDetails = async () => {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    throw new Error("No token found. Please log in.");
+  }
+
+  const res = await fetch("/api/v4/users/self", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+    return data;
+  } else {
+    throw new Error("Failed to fetch user details");
+  }
+};

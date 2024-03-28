@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Portal = () => {
-  const token = localStorage.getItem("token");
-  console.log("Token in Portal:", token);
+  const [userDetails, setUserDetails] = useState(null);
 
   return <div>Portal</div>;
 };
