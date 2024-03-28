@@ -26,7 +26,7 @@ const Login = () => {
         height: "100vh",
       }}
     >
-      <div style={{ width: 300 }}>
+      <div style={{ width: 300, padding: "20px", background: "gray" }}>
         <Title level={2} style={{ textAlign: "center", marginBottom: 24 }}>
           CHATIVO
         </Title>
