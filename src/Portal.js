@@ -21,6 +21,7 @@ const Portal = () => {
 
   const handleLogout = async () => {
     try {
+      localStorage.removeItem("token"); //Remove token
       navigate("/"); // Navigate to the login page
     } catch (error) {
       console.error("Failed to logout:", error);
