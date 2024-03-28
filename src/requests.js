@@ -22,13 +22,15 @@ export const login = async (params) => {
 
 export const fetchUserDetails = async () => {
   const token = localStorage.getItem("token");
-
   if (!token) {
     throw new Error("No token found. Please log in.");
   }
 
   const res = await fetch("/api/v4/users/self", {
     headers: {
+      "X-API-KEY": "INFINIDESK_WEB",
+      "X-Requested-With": "XMLHttpRequest",
+      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   });
