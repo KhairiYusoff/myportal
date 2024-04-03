@@ -14,7 +14,9 @@ export const login = async (params) => {
 
   if (res.ok) {
     const data = await res.json();
-    return data.token;
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("refreshToken", data.refresh_token);
+    return data;
   } else {
     throw new Error("Login failed");
   }
@@ -40,5 +42,35 @@ export const fetchUserDetails = async () => {
     return data;
   } else {
     throw new Error("Failed to fetch user details");
+  }
+};
+
+export const refreshToken = async () => {
+  const token = localStorage.getItem("token");
+  const refreshToken = localStorage.getItem("refreshToken");
+  if (!token) {
+    throw new Error("No token found. Cannot refresh token.");
+  }
+
+  const res = await fetch(`/api/v4/auth/token/refresh`, {
+    method: "POST",
+    headers: {
+      "X-API-KEY": "INFINIDESK_WEB",
+      "X-Requested-With": "XMLHttpRequest",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      refresh_token: refreshToken,
+    }),
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("refreshToken", data.refresh_token);
+    return data;
+  } else {
+    throw new Error("Failed to refresh token");
   }
 };

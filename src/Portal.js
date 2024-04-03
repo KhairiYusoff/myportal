@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { fetchUserDetails } from "./requests";
-import { Button } from "antd";
-import { useNavigate } from "react-router-dom";
+import Logout from "./Logout";
 
 const Portal = () => {
   const [userDetails, setUserDetails] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,15 +17,6 @@ const Portal = () => {
     fetchData();
   }, []);
 
-  const handleLogout = async () => {
-    try {
-      localStorage.removeItem("token"); //Remove token
-      navigate("/"); // Navigate to the login page
-    } catch (error) {
-      console.error("Failed to logout:", error);
-    }
-  };
-
   return (
     <div className="portal">
       <h1>Welcome to Chativo Portal</h1>
@@ -40,9 +29,7 @@ const Portal = () => {
           <p>Username: {userDetails.username}</p>
           <p>Email: {userDetails.email}</p>
           <br />
-          <Button type="primary" onClick={handleLogout}>
-            Logout
-          </Button>
+          <Logout />
         </div>
       ) : (
         <p>Loading user details...</p>

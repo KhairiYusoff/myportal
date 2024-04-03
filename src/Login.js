@@ -9,9 +9,10 @@ const Login = () => {
   const navigate = useNavigate();
   const onFinish = async (values) => {
     try {
-      const token = await login(values);
-      localStorage.setItem("token", token);
-      navigate("/portal");
+      const data = await login(values);
+      if (data.token) {
+        navigate("/portal");
+      }
     } catch (error) {
       console.error("Login failed:", error);
     }
