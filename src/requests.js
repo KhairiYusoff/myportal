@@ -16,6 +16,7 @@ export const login = async (params) => {
     const data = await res.json();
     localStorage.setItem("token", data.token);
     localStorage.setItem("refreshToken", data.refresh_token);
+    localStorage.setItem("expires", data.expires);
     return data;
   } else {
     throw new Error("Login failed");
