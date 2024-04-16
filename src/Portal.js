@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { fetchUserDetails, refreshToken } from "./requests";
 import Logout from "./Logout";
+import { message } from "antd";
 
 const Portal = () => {
   const [userDetails, setUserDetails] = useState(null);
@@ -20,6 +21,7 @@ const Portal = () => {
         }
       } catch (error) {
         console.error("Failed to fetch user details:", error);
+        message.error("Failed to fetch user details. Please try again.");
       }
     };
     fetchData();
@@ -41,6 +43,7 @@ const Portal = () => {
             setExpirationTime(newExpirationTime);
           } catch (error) {
             console.error("Failed to refresh token:", error);
+            message.error("Failed to refresh token. Please login again.");
             clearInterval(timer);
             setRemainingTime("00:00");
           }

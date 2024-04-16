@@ -2,6 +2,7 @@ import React from "react";
 import { Form, Input, Button, Typography } from "antd";
 import { login } from "./requests";
 import { useNavigate } from "react-router-dom";
+import { message } from "antd";
 
 const { Title } = Typography;
 
@@ -15,6 +16,7 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Login failed:", error);
+      message.error("Login failed. Please try again.");
     }
   };
 
