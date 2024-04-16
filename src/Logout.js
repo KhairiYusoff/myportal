@@ -6,8 +6,10 @@ const Logout = () => {
   const navigate = useNavigate();
   const handleLogout = async () => {
     try {
+      // Clear authentication data from local storage
       localStorage.removeItem("token");
       localStorage.removeItem("refreshToken");
+      localStorage.removeItem("expires");
       navigate("/");
     } catch (error) {
       console.error("Failed to logout:", error);
