@@ -40,10 +40,16 @@ const Login = () => {
             password: "123123123",
           }}
         >
-          <Form.Item name="username">
+          <Form.Item
+            name="username"
+            rules={[{ required: true, message: "Please enter your username" }]}
+          >
             <Input placeholder="Username" />
           </Form.Item>
-          <Form.Item name="password">
+          <Form.Item
+            name="password"
+            rules={[{ required: true, message: "Please enter your password" }]}
+          >
             <Input.Password placeholder="Password" />
           </Form.Item>
           <Form.Item>
