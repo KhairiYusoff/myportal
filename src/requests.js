@@ -1,8 +1,10 @@
+import { API_KEY, BASE_URL } from "./config";
+
 export const login = async (params) => {
-  const res = await fetch("/api/v4/auth/token", {
+  const res = await fetch(`${BASE_URL}/auth/token`, {
     method: "POST",
     headers: {
-      "X-API-KEY": "INFINIDESK_WEB",
+      "X-API-KEY": API_KEY,
       "X-Requested-With": "XMLHttpRequest",
       "Content-Type": "application/json",
     },
@@ -29,9 +31,9 @@ export const fetchUserDetails = async () => {
     throw new Error("No token found. Please log in.");
   }
 
-  const res = await fetch("/api/v4/users/self", {
+  const res = await fetch(`${BASE_URL}/users/self`, {
     headers: {
-      "X-API-KEY": "INFINIDESK_WEB",
+      "X-API-KEY": API_KEY,
       "X-Requested-With": "XMLHttpRequest",
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
@@ -53,10 +55,10 @@ export const refreshToken = async () => {
     throw new Error("No token found. Cannot refresh token.");
   }
 
-  const res = await fetch(`/api/v4/auth/token/refresh`, {
+  const res = await fetch(`${BASE_URL}/auth/token/refresh`, {
     method: "POST",
     headers: {
-      "X-API-KEY": "INFINIDESK_WEB",
+      "X-API-KEY": API_KEY,
       "X-Requested-With": "XMLHttpRequest",
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
